@@ -43,8 +43,10 @@ const Index = () => {
                 Adicione o widget em qualquer site com apenas uma linha:
               </p>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
-                {`<script src="https://widget.minhasolucoes.com/embed.js" 
-        data-client-id="CLIENTE123"></script>`}
+                {`   <script src="http://localhost:8081/embed.js" 
+                        data-client-id="CLIENTE123" 
+                        data-widget-url="http://localhost:8081/chat">
+                    </script>`}
               </div>
             </div>
 
@@ -79,7 +81,7 @@ const Index = () => {
                 <h3 className="font-semibold text-gray-900 mb-2">Integração</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li>• iframe isolado</li>
-                  <li>• Script embed < 5kb</li>
+                <li>• Script embed &lt; 5kb</li>
                   <li>• Zero dependências</li>
                   <li>• Cross-origin ready</li>
                 </ul>
@@ -103,9 +105,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-
-      {/* Widget de Chat */}
-      <ChatWidget clientId={clientId} />
     </div>
   );
 };

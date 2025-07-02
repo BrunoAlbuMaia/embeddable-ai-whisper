@@ -89,14 +89,9 @@
     </div>
 
     <!-- INTEGRAÇÃO DO CHAT WIDGET - APENAS ESTA LINHA! -->
-    <script>
-        // Para esta demonstração, vamos carregar do localhost
-        // Em produção, seria: src="https://widget.minhasolucoes.com/embed.js"
-        const script = document.createElement('script');
-        script.src = './embed.js';
-        script.setAttribute('data-client-id', 'EXEMPLO123');
-        script.setAttribute('data-widget-url', window.location.origin);
-        document.body.appendChild(script);
+    <script src="http://localhost:8081/embed.js" 
+        data-client-id="CLIENTE123" 
+        data-widget-url="http://localhost:8081/chat">
     </script>
 </body>
 </html>
