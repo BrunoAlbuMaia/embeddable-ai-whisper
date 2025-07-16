@@ -40,6 +40,7 @@
       background: white;
       border-radius: 12px;
       position: relative;
+      z-index: 10;
     `;
 
     // Botão flutuante para abrir chat
