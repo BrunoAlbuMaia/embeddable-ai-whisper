@@ -58,6 +58,7 @@
       cursor: pointer;
       user-select: none;
       transition: all 0.3s ease;
+      z-index: 1;
     `;
     toggleButton.textContent = '💬';
 
