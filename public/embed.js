@@ -39,7 +39,9 @@
       display: none;
       background: white;
       border-radius: 12px;
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       z-index: 10;
     `;
 
