@@ -66,8 +66,8 @@
     closeButton.id = 'chat-close-button';
     closeButton.style.cssText = `
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: -15px;
+      right: -15px;
       width: 30px;
       height: 30px;
       background: #ef4444;
@@ -79,7 +79,7 @@
       border-radius: 50%;
       cursor: pointer;
       user-select: none;
-      z-index: 10;
+      z-index: 1000;
       display: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     `;
