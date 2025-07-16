@@ -105,6 +105,9 @@
 
       chatIframe.style.display = 'block';
       toggleButton.style.display = 'none';
+      toggleButton.style.visibility = 'hidden';
+      toggleButton.style.opacity = '0';
+      toggleButton.style.zIndex = '-1';
       closeButton.style.display = 'block';
     });
 
@@ -119,6 +122,9 @@
 
       chatIframe.style.display = 'none';
       toggleButton.style.display = 'flex';
+      toggleButton.style.visibility = 'visible';
+      toggleButton.style.opacity = '1';
+      toggleButton.style.zIndex = '1';
       closeButton.style.display = 'none';
     });
 
