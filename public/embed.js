@@ -13,42 +13,13 @@
   const widgetUrl = currentScript.getAttribute('data-widget-url') || window.location.origin + '/chat';
 
   function createChatWidget() {
-    const widgetContainer = document.createElement('div');
-    widgetContainer.id = 'chat-widget-container';
-    widgetContainer.style.cssText = `
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      overflow: hidden;
-      z-index: 2147483647;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      background: white;
-    `;
-
-    const chatIframe = document.createElement('iframe');
-    chatIframe.id = 'chat-widget-iframe';
-    chatIframe.src = `${widgetUrl}?client_id=${encodeURIComponent(clientId)}`;
-    chatIframe.style.cssText = `
-      border: none;
-      width: 100%;
-      height: 100%;
-      display: none;
-      background: white;
-      border-radius: 12px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-    `;
-
-    // Botão flutuante para abrir chat
+    // Container separado para o botão toggle
     const toggleButton = document.createElement('div');
     toggleButton.id = 'chat-toggle-button';
     toggleButton.style.cssText = `
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
       width: 64px;
       height: 64px;
       background: #3b82f6;
@@ -61,9 +32,39 @@
       cursor: pointer;
       user-select: none;
       transition: all 0.3s ease;
-      z-index: 1;
+      z-index: 2147483647;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     `;
     toggleButton.textContent = '💬';
+
+    // Container separado para o chat iframe
+    const widgetContainer = document.createElement('div');
+    widgetContainer.id = 'chat-widget-container';
+    widgetContainer.style.cssText = `
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 400px;
+      height: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 2147483646;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background: white;
+      display: none;
+    `;
+
+    const chatIframe = document.createElement('iframe');
+    chatIframe.id = 'chat-widget-iframe';
+    chatIframe.src = `${widgetUrl}?client_id=${encodeURIComponent(clientId)}`;
+    chatIframe.style.cssText = `
+      border: none;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 12px;
+    `;
 
     // Botão X dentro do widget para fechar/minimizar chat
     const closeButton = document.createElement('div');
@@ -102,35 +103,23 @@
       widgetContainer.style.bottom = isMobile ? '0' : '16px';
       widgetContainer.style.right = isMobile ? '0' : '16px';
       widgetContainer.style.borderRadius = isMobile ? '0' : '12px';
+      widgetContainer.style.display = 'block';
 
-      chatIframe.style.display = 'block';
       toggleButton.style.display = 'none';
-      toggleButton.style.visibility = 'hidden';
-      toggleButton.style.opacity = '0';
-      toggleButton.style.zIndex = '-1';
       closeButton.style.display = 'block';
     });
 
     closeButton.addEventListener('click', () => {
       isOpen = false;
 
-      widgetContainer.style.width = '64px';
-      widgetContainer.style.height = '64px';
-      widgetContainer.style.bottom = '16px';
-      widgetContainer.style.right = '16px';
-      widgetContainer.style.borderRadius = '50%';
-
-      chatIframe.style.display = 'none';
+      widgetContainer.style.display = 'none';
       toggleButton.style.display = 'flex';
-      toggleButton.style.visibility = 'visible';
-      toggleButton.style.opacity = '1';
-      toggleButton.style.zIndex = '1';
       closeButton.style.display = 'none';
     });
 
-    widgetContainer.appendChild(toggleButton);
     widgetContainer.appendChild(chatIframe);
     widgetContainer.appendChild(closeButton);
+    document.body.appendChild(toggleButton);
     document.body.appendChild(widgetContainer);
   }
 
