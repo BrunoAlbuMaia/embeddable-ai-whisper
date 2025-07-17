@@ -6,13 +6,19 @@ const Index = () => {
   const [clientId, setClientId] = useState<string>('CLIENTE123');
 
   useEffect(() => {
-    // Simula a captura do client_id dos parâmetros da URL (como seria no iframe)
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlClientId = urlParams.get('client_id');
-    if (urlClientId) {
-      setClientId(urlClientId);
-    }
+    const script = document.createElement("script");
+    script.src = "http://localhost:8080/embed.js";
+    script.setAttribute("data-client-id", "CLIENTE123");
+    script.setAttribute("data-widget-url", "http://localhost:8080/chat");
+    script.async = true;
+    document.body.appendChild(script);
+
+    // opcional: limpeza
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

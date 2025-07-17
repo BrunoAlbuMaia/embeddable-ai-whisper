@@ -11,19 +11,7 @@ import { useEffect } from "react";
 const queryClient = new QueryClient();
 
 const App = () => {
-    useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "http://localhost:8081/embed.js";
-    script.setAttribute("data-client-id", "CLIENTE123");
-    script.setAttribute("data-widget-url", "http://localhost:8081/chat");
-    script.async = true;
-    document.body.appendChild(script);
 
-    // opcional: limpeza
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
   return(
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
