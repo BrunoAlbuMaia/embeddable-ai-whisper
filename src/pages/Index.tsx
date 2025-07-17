@@ -49,10 +49,34 @@ const Index = () => {
                 Adicione o widget em qualquer site com apenas uma linha:
               </p>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                <p className="text-gray-600 mb-4">
+                    Usando no HTML
+                </p>
                 {`   <script src="http://localhost:8081/embed.js" 
                         data-client-id="CLIENTE123" 
                         data-widget-url="http://localhost:8081/chat">
                     </script>`}
+              </div>
+                    <br></br>
+              <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                <p className="text-gray-600 mb-4">
+                    Usando no .jsx/.tsx
+                </p>
+                {`  const [clientId, setClientId] = useState<string>('CLIENTE123');
+
+                  useEffect(() => {
+                    const script = document.createElement("script");
+                    script.src = "http://localhost:8080/embed.js";
+                    script.setAttribute("data-client-id", "CLIENTE123");
+                    script.setAttribute("data-widget-url", "http://localhost:8080/chat");
+                    script.async = true;
+                    document.body.appendChild(script);
+
+                    // opcional: limpeza
+                    return () => {
+                      document.body.removeChild(script);
+                    };
+                  }, []);`}
               </div>
             </div>
 
@@ -69,40 +93,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-8 shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-              📋 Especificações Técnicas
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Frontend</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• React + TypeScript</li>
-                  <li>• Tailwind CSS</li>
-                  <li>• Lucide React Icons</li>
-                  <li>• Animações fluidas</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Integração</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• iframe isolado</li>
-                <li>• Script embed &lt; 5kb</li>
-                  <li>• Zero dependências</li>
-                  <li>• Cross-origin ready</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">API</h3>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• POST para sua API RAG</li>
-                  <li>• client_id automático</li>
-                  <li>• Tratamento de erros</li>
-                  <li>• Loading states</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          
 
           <div className="text-center mt-12">
             <p className="text-gray-500 text-sm">
