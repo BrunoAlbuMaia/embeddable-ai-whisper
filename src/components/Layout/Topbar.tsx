@@ -11,13 +11,23 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { LogOut, User, Settings } from 'lucide-react';
+import { LogOut, User, Settings, ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Topbar: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, getAccountUrl } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleProfileClick = () => {
+    navigate('/dashboard/profile');
+  };
+
+  const handleAccountSettings = () => {
+    window.open(getAccountUrl(), '_blank');
   };
 
   return (
@@ -27,7 +37,7 @@ export const Topbar: React.FC = () => {
           <SidebarTrigger />
           <div className="flex flex-col">
             <h1 className="text-lg font-semibold text-foreground">
-              {user?.company || 'Dashboard'}
+              DocsIA Dashboard
             </h1>
             <p className="text-xs text-muted-foreground">
               Sistema de Gestão de IA
@@ -56,13 +66,14 @@ export const Topbar: React.FC = () => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleProfileClick}>
                 <User className="mr-2 h-4 w-4" />
                 <span>Perfil</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleAccountSettings}>
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Configurações</span>
+                <span>Configurações no Keycloak</span>
+                <ExternalLink className="ml-auto h-4 w-4" />
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout} className="text-destructive">

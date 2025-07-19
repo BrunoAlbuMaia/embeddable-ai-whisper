@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { DashboardLayout } from "./components/Layout/DashboardLayout";
 import Index from "./pages/Index";
 import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 import ChatPage from "./pages/ChatPage";
 import ChatsPage from "./pages/dashboard/ChatsPage";
@@ -49,6 +50,13 @@ const App = () => {
                 <ProtectedRoute>
                   <DashboardLayout>
                     <SegmentsPage />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard/profile" element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <ProfilePage />
                   </DashboardLayout>
                 </ProtectedRoute>
               } />
