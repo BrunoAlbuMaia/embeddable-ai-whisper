@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { initKeycloak, login as keycloakLogin, logout as keycloakLogout, getUserInfo, isAuthenticated } from '@/lib/keycloak';
+import { initKeycloak, login as keycloakLogin, logout as keycloakLogout, getUserInfo, isAuthenticated, redirectToAccountManagement } from '@/lib/keycloak';
 
 interface User {
   id: string;
@@ -13,6 +13,7 @@ interface AuthContextType {
   user: User | null;
   login: () => Promise<boolean>;
   logout: () => void;
+  openAccountManagement: () => void;
   isLoading: boolean;
 }
 
@@ -66,8 +67,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     keycloakLogout();
   };
 
+  const openAccountManagement = () => {
+    redirectToAccountManagement();
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, openAccountManagement, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

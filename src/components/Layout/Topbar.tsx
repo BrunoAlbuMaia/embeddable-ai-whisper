@@ -14,10 +14,14 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { LogOut, User, Settings } from 'lucide-react';
 
 export const Topbar: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, openAccountManagement } = useAuth();
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleOpenSettings = () => {
+    openAccountManagement();
   };
 
   return (
@@ -60,7 +64,7 @@ export const Topbar: React.FC = () => {
                 <User className="mr-2 h-4 w-4" />
                 <span>Perfil</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleOpenSettings}>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Configurações</span>
               </DropdownMenuItem>

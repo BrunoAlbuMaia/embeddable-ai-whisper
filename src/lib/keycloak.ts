@@ -79,5 +79,13 @@ export const getToken = () => {
   return keycloak.token;
 };
 
+// Função para redirecionar para a tela de edição de perfil do Keycloak
+export const redirectToAccountManagement = () => {
+  if (keycloak.authenticated) {
+    const accountUrl = keycloak.createAccountUrl();
+    window.location.href = accountUrl;
+  }
+};
+
 // Exportar a instância do Keycloak para uso direto se necessário
 export default keycloak;
