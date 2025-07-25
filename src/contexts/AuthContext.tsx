@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { initKeycloak, login as keycloakLogin, logout as keycloakLogout, getUserInfo, isAuthenticated } from '@/lib/keycloak';
 
 interface User {
   id: string;
   email: string;
   name: string;
   company: string;
+  preferred_username: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: () => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -29,33 +31,39 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on app start
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setIsLoading(false);
+    const initAuth = async () => {
+      try {
+        const authenticated = await initKeycloak();
+        
+        if (authenticated) {
+          const userInfo = getUserInfo();
+          if (userInfo) {
+            setUser(userInfo);
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao inicializar autenticação:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulated login - replace with real authentication
-    if (email && password.length >= 6) {
-      const user = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        company: 'Minha Empresa'
-      };
-      setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
+  const login = async (): Promise<boolean> => {
+    try {
+      keycloakLogin();
       return true;
+    } catch (error) {
+      console.error('Erro no login:', error);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    keycloakLogout();
   };
 
   return (
