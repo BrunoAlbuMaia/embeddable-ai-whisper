@@ -1,19 +1,14 @@
 import Keycloak from 'keycloak-js';
 
 // Configuração do Keycloak
-const keycloakConfig = {
-  url: 'http://192.168.100.3:8081',
-  realm: 'DocsIA',
-  clientId: 'client-react',
-};
+
 
 // Instância do Keycloak
-const keycloak = new Keycloak(keycloakConfig);
+const keycloak = new Keycloak('./keycloak.json');
 
 // Configurações de inicialização
 const keycloakInitOptions = {
   onLoad: 'check-sso' as const,
-  flow: 'standard' as const,
   pkceMethod: 'S256' as const,
   checkLoginIframe: false,
   silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
