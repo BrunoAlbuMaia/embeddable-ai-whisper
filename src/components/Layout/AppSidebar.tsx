@@ -16,7 +16,8 @@ import {
   MessageSquare, 
   FileText, 
   Target, 
-  Bot 
+  Bot,
+  CreditCard
 } from 'lucide-react';
 
 const menuItems = [
@@ -37,6 +38,12 @@ const menuItems = [
     url: '/dashboard/segments',
     icon: Target,
     description: 'Gerenciar segmentos'
+  },
+  {
+    title: 'Planos',
+    url: '/dashboard/plans',
+    icon: CreditCard,
+    description: 'Gerenciar assinatura'
   }
 ];
 

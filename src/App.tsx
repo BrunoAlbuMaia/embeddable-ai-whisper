@@ -13,6 +13,7 @@ import ChatPage from "./pages/ChatPage";
 import ChatsPage from "./pages/dashboard/ChatsPage";
 import DocumentsPage from "./pages/dashboard/DocumentsPage";
 import SegmentsPage from "./pages/dashboard/SegmentsPage";
+import PlansPage from "./pages/dashboard/PlansPage";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,13 @@ const App = () => {
                 <ProtectedRoute>
                   <DashboardLayout>
                     <SegmentsPage />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard/plans" element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <PlansPage />
                   </DashboardLayout>
                 </ProtectedRoute>
               } />

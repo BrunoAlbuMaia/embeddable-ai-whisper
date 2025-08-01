@@ -53,6 +53,17 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Plan colors */
+    --plan-starter: 142 76% 36%;
+    --plan-pro: 262 83% 58%;
+    --plan-master: 25 95% 53%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+    --gradient-plan-starter: linear-gradient(135deg, hsl(var(--plan-starter)), hsl(var(--plan-starter) / 0.8));
+    --gradient-plan-pro: linear-gradient(135deg, hsl(var(--plan-pro)), hsl(var(--plan-pro) / 0.8));
+    --gradient-plan-master: linear-gradient(135deg, hsl(var(--plan-master)), hsl(var(--plan-master) / 0.8));
   }
 
   .dark {
@@ -91,6 +102,11 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Plan colors (dark mode) */
+    --plan-starter: 142 76% 36%;
+    --plan-pro: 262 83% 58%;
+    --plan-master: 25 95% 53%;
   }
 }
 
