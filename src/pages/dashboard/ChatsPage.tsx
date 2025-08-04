@@ -61,7 +61,7 @@ const ChatsPage = () => {
 
   const handleViewWidget = () => {
     // Navigate to widget integration guide
-    window.open('/', '_blank');
+    window.open('/chat', '_blank');
   };
 
   if (isLoading) {
