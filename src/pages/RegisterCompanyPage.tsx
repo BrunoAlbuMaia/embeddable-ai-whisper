@@ -12,6 +12,7 @@ interface CompanyData {
   name: string;
   type: 'pessoa_fisica' | 'pessoa_juridica';
   document: string;
+  company_id?: string; // opcional, será preenchido após o cadastro
 }
 
 const RegisterCompanyPage: React.FC = () => {
@@ -21,7 +22,8 @@ const RegisterCompanyPage: React.FC = () => {
   const [formData, setFormData] = useState<CompanyData>({
     name: '',
     type: 'pessoa_fisica',
-    document: ''
+    document: '',
+    company_id: undefined
   });
 
   const handleInputChange = (field: keyof CompanyData, value: string) => {
@@ -95,39 +97,45 @@ const RegisterCompanyPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
 
     try {
-      // Simular chamada para API
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simular resposta da API com token
-      const mockApiResponse = {
-        success: true,
-        company_id: 'comp_' + Math.random().toString(36).substr(2, 9),
-        token: 'token_' + Math.random().toString(36).substr(2, 16)
-      };
+      const response = await fetch('http://localhost:9005/api/company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          tax_id: formData.document.replace(/\D/g, ''), // só números
+          tax_type: formData.type === 'pessoa_fisica' ? 'cpf' : 'cnpj'
+          // Adicione outros campos necessários aqui
+        })
+      });
 
-      if (mockApiResponse.success) {
-        // Armazenar dados temporariamente para a próxima etapa
-        sessionStorage.setItem('company_data', JSON.stringify({
-          ...formData,
-          company_id: mockApiResponse.company_id,
-          token: mockApiResponse.token
-        }));
-
-        toast({
-          title: "Empresa cadastrada com sucesso!",
-          description: "Agora vamos criar sua conta de usuário.",
-        });
-
-        // Redirecionar para criação de usuário
-        navigate('/register/user');
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
       }
+
+      const data = await response.json();
+
+      toast({
+        title: "Empresa cadastrada com sucesso!",
+        description: "Agora vamos criar sua conta de usuário.",
+      });
+
+      sessionStorage.setItem('company_data', JSON.stringify({
+        ...formData,
+        company_id: data.data, // ajusta conforme o retorno real da sua API
+      }));
+
+      navigate('/register/user');
+
     } catch (error) {
+      console.error(error);
       toast({
         title: "Erro",
         description: "Não foi possível cadastrar a empresa. Tente novamente.",
@@ -137,6 +145,7 @@ const RegisterCompanyPage: React.FC = () => {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5">

@@ -9,6 +9,7 @@ import { ArrowLeft, User, CheckCircle2, Loader2, Eye, EyeOff, Building2 } from '
 import { useToast } from '@/hooks/use-toast';
 
 interface UserData {
+  username?: string; // opcional, pode ser usado para login
   firstName: string;
   lastName: string;
   email: string;
@@ -21,7 +22,6 @@ interface CompanyData {
   type: 'pessoa_fisica' | 'pessoa_juridica';
   document: string;
   company_id: string;
-  token: string;
 }
 
 const RegisterUserPage: React.FC = () => {
@@ -32,6 +32,7 @@ const RegisterUserPage: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [companyData, setCompanyData] = useState<CompanyData | null>(null);
   const [formData, setFormData] = useState<UserData>({
+    username: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -118,32 +119,32 @@ const RegisterUserPage: React.FC = () => {
       return false;
     }
 
-    if (!formData.password) {
-      toast({
-        title: "Campo obrigatório",
-        description: "Por favor, crie uma senha.",
-        variant: "destructive",
-      });
-      return false;
-    }
+    // if (!formData.password) {
+    //   toast({
+    //     title: "Campo obrigatório",
+    //     description: "Por favor, crie uma senha.",
+    //     variant: "destructive",
+    //   });
+    //   return false;
+    // }
 
-    if (!validatePassword(formData.password)) {
-      toast({
-        title: "Senha muito fraca",
-        description: "A senha deve ter pelo menos 6 caracteres.",
-        variant: "destructive",
-      });
-      return false;
-    }
+    // if (!validatePassword(formData.password)) {
+    //   toast({
+    //     title: "Senha muito fraca",
+    //     description: "A senha deve ter pelo menos 6 caracteres.",
+    //     variant: "destructive",
+    //   });
+    //   return false;
+    // }
 
-    if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Senhas não coincidem",
-        description: "Por favor, confirme sua senha corretamente.",
-        variant: "destructive",
-      });
-      return false;
-    }
+    // if (formData.password !== formData.confirmPassword) {
+    //   toast({
+    //     title: "Senhas não coincidem",
+    //     description: "Por favor, confirme sua senha corretamente.",
+    //     variant: "destructive",
+    //   });
+    //   return false;
+    // }
 
     return true;
   };
@@ -156,29 +157,39 @@ const RegisterUserPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Simular chamada para API de criação de usuário
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simular resposta da API
-      const mockApiResponse = {
-        success: true,
-        user_id: 'user_' + Math.random().toString(36).substr(2, 9),
-        message: 'Usuário criado com sucesso'
-      };
+        const response = await fetch('http://localhost:9005/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          company_id: companyData.company_id,
+          username: formData.username,
+          email: formData.email,
+          first_name: formData.firstName,
+          last_name: formData.lastName
+        })
+      });
 
-      if (mockApiResponse.success) {
-        // Limpar dados temporários
-        sessionStorage.removeItem('company_data');
-
-        toast({
-          title: "Conta criada com sucesso! 🎉",
-          description: "Você já pode fazer login e começar a usar a plataforma.",
-        });
-
-        // Redirecionar para login
-        navigate('/login');
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
       }
+
+      const data = await response.json();
+
+      toast({
+        title: "Conta criada com sucesso! 🎉",
+        description: data.message || "Você já pode fazer login e começar a usar a plataforma. Use a senha 123456",
+      });
+
+      // Limpa dados temporários
+      sessionStorage.removeItem('company_data');
+
+      // Redireciona para login
+      navigate('/login');
+
     } catch (error) {
+      console.error(error);
       toast({
         title: "Erro",
         description: "Não foi possível criar sua conta. Tente novamente.",
@@ -188,7 +199,6 @@ const RegisterUserPage: React.FC = () => {
       setIsLoading(false);
     }
   };
-
   if (!companyData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
@@ -313,7 +323,7 @@ const RegisterUserPage: React.FC = () => {
                   />
                 </div>
 
-                {/* Senha */}
+                {/* Senha 
                 <div className="space-y-2">
                   <Label htmlFor="password">Senha</Label>
                   <div className="relative">
@@ -337,9 +347,9 @@ const RegisterUserPage: React.FC = () => {
                       )}
                     </button>
                   </div>
-                </div>
+                </div>/*}
 
-                {/* Confirmar Senha */}
+                {/* Confirmar Senha 
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">Confirmar Senha</Label>
                   <div className="relative">
@@ -363,7 +373,7 @@ const RegisterUserPage: React.FC = () => {
                       )}
                     </button>
                   </div>
-                </div>
+                </div>*/}
 
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? (

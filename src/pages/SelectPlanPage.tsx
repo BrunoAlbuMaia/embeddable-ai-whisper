@@ -45,64 +45,64 @@ const plans: Plan[] = [
       { text: 'Integrações premium', included: false },
     ]
   },
-  {
-    id: 'starter',
-    name: 'Plano Starter',
-    price: 'R$ 29',
-    priceDescription: '/mês',
-    description: 'Ideal para pequenos projetos e testes iniciais',
-    storageLimit: '5 GB',
-    icon: Zap,
-    features: [
-      { text: '5 GB de armazenamento', included: true },
-      { text: '100 consultas por dia', included: true },
-      { text: 'Suporte por email', included: true },
-      { text: 'API básica', included: true },
-      { text: 'Análises avançadas', included: false },
-      { text: 'Suporte prioritário', included: false },
-      { text: 'Integrações premium', included: false },
-    ]
-  },
-  {
-    id: 'pro',
-    name: 'Plano Pro',
-    price: 'R$ 79',
-    priceDescription: '/mês',
-    description: 'Para empresas em crescimento que precisam de mais recursos',
-    storageLimit: '15 GB',
-    popular: true,
-    badge: 'Mais Popular',
-    icon: Crown,
-    features: [
-      { text: '15 GB de armazenamento', included: true },
-      { text: '1.000 consultas por dia', included: true },
-      { text: 'Suporte prioritário', included: true },
-      { text: 'API completa', included: true },
-      { text: 'Análises avançadas', included: true },
-      { text: 'Integrações premium', included: true },
-      { text: 'Backup automático', included: true },
-    ]
-  },
-  {
-    id: 'master',
-    name: 'Plano Master',
-    price: 'R$ 149',
-    priceDescription: '/mês',
-    description: 'Solução enterprise com recursos ilimitados',
-    storageLimit: '50 GB',
-    badge: 'Enterprise',
-    icon: Rocket,
-    features: [
-      { text: '50 GB de armazenamento', included: true },
-      { text: 'Consultas ilimitadas', included: true },
-      { text: 'Suporte 24/7', included: true },
-      { text: 'API completa + Webhooks', included: true },
-      { text: 'Análises avançadas', included: true },
-      { text: 'Integrações premium', included: true },
-      { text: 'Backup automático', included: true },
-      { text: 'Gerente de conta dedicado', included: true },
-    ]
-  }
+  // {
+  //   id: 'starter',
+  //   name: 'Plano Starter',
+  //   price: 'R$ 29',
+  //   priceDescription: '/mês',
+  //   description: 'Ideal para pequenos projetos e testes iniciais',
+  //   storageLimit: '5 GB',
+  //   icon: Zap,
+  //   features: [
+  //     { text: '5 GB de armazenamento', included: true },
+  //     { text: '100 consultas por dia', included: true },
+  //     { text: 'Suporte por email', included: true },
+  //     { text: 'API básica', included: true },
+  //     { text: 'Análises avançadas', included: false },
+  //     { text: 'Suporte prioritário', included: false },
+  //     { text: 'Integrações premium', included: false },
+  //   ]
+  // },
+  // {
+  //   id: 'pro',
+  //   name: 'Plano Pro',
+  //   price: 'R$ 79',
+  //   priceDescription: '/mês',
+  //   description: 'Para empresas em crescimento que precisam de mais recursos',
+  //   storageLimit: '15 GB',
+  //   popular: true,
+  //   badge: 'Mais Popular',
+  //   icon: Crown,
+  //   features: [
+  //     { text: '15 GB de armazenamento', included: true },
+  //     { text: '1.000 consultas por dia', included: true },
+  //     { text: 'Suporte prioritário', included: true },
+  //     { text: 'API completa', included: true },
+  //     { text: 'Análises avançadas', included: true },
+  //     { text: 'Integrações premium', included: true },
+  //     { text: 'Backup automático', included: true },
+  //   ]
+  // },
+  // {
+  //   id: 'master',
+  //   name: 'Plano Master',
+  //   price: 'R$ 149',
+  //   priceDescription: '/mês',
+  //   description: 'Solução enterprise com recursos ilimitados',
+  //   storageLimit: '50 GB',
+  //   badge: 'Enterprise',
+  //   icon: Rocket,
+  //   features: [
+  //     { text: '50 GB de armazenamento', included: true },
+  //     { text: 'Consultas ilimitadas', included: true },
+  //     { text: 'Suporte 24/7', included: true },
+  //     { text: 'API completa + Webhooks', included: true },
+  //     { text: 'Análises avançadas', included: true },
+  //     { text: 'Integrações premium', included: true },
+  //     { text: 'Backup automático', included: true },
+  //     { text: 'Gerente de conta dedicado', included: true },
+  //   ]
+  // }
 ];
 
 const SelectPlanPage: React.FC = () => {

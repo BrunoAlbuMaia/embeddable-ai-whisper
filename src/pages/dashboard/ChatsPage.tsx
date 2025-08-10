@@ -243,9 +243,9 @@ const ChatsPage = () => {
               <p className="text-sm text-muted-foreground mb-2">Código de integração:</p>
               <code className="text-sm bg-background p-2 rounded border block">
                 {`<script src="${window.location.origin}/embed.js" 
-        data-client-id="SEU_CLIENT_ID" 
-        data-widget-url="${window.location.origin}/chat">
-</script>`}
+                        data-client-id="SEU_CLIENT_ID" 
+                        data-widget-url="${window.location.origin}/chat">
+                </script>`}
               </code>
             </div>
             <div className="flex gap-2">
