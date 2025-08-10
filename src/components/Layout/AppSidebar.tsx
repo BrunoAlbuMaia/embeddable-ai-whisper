@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { 
   Sidebar, 
   SidebarContent, 
@@ -20,37 +21,43 @@ import {
   CreditCard
 } from 'lucide-react';
 
-const menuItems = [
-  {
-    title: 'Chats',
-    url: '/dashboard',
-    icon: MessageSquare,
-    description: 'Histórico de conversas'
-  },
-  {
-    title: 'Documentos',
-    url: '/dashboard/documents',
-    icon: FileText,
-    description: 'Treinar a IA'
-  },
-  {
-    title: 'Segmentos',
-    url: '/dashboard/segments',
-    icon: Target,
-    description: 'Gerenciar segmentos'
-  },
-  {
-    title: 'Planos',
-    url: '/dashboard/plans',
-    icon: CreditCard,
-    description: 'Gerenciar assinatura'
-  }
-];
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
   const location = useLocation();
+  const { t } = useTranslation();
+
+  const menuItems = [
+    {
+      title: t('nav.chats'),
+      url: '/dashboard',
+      icon: MessageSquare,
+      description: 'Histórico de conversas',
+      tutorial: 'dashboard'
+    },
+    {
+      title: t('nav.documents'),
+      url: '/dashboard/documents',
+      icon: FileText,
+      description: 'Treinar a IA',
+      tutorial: 'documents'
+    },
+    {
+      title: t('nav.segments'),
+      url: '/dashboard/segments',
+      icon: Target,
+      description: 'Gerenciar segmentos',
+      tutorial: 'segments'
+    },
+    {
+      title: t('nav.plans'),
+      url: '/dashboard/plans',
+      icon: CreditCard,
+      description: 'Gerenciar assinatura',
+      tutorial: 'plans'
+    }
+  ];
 
   const isActive = (path: string) => {
     if (path === '/dashboard') {
@@ -87,7 +94,11 @@ export function AppSidebar() {
                     isActive={isActive(item.url)}
                     className="group"
                   >
-                    <NavLink to={item.url} className="flex items-center gap-3">
+                    <NavLink 
+                      to={item.url} 
+                      className="flex items-center gap-3"
+                      data-tutorial={item.tutorial}
+                    >
                       <item.icon className="h-4 w-4" />
                       {!collapsed && (
                         <div className="flex flex-col">

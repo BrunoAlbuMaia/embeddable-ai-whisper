@@ -2,6 +2,9 @@ import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { LanguageToggle } from '@/components/LanguageToggle';
+import { useTranslation } from 'react-i18next';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
@@ -15,6 +18,7 @@ import { LogOut, User, Settings } from 'lucide-react';
 
 export const Topbar: React.FC = () => {
   const { user, logout, openAccountManagement } = useAuth();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     logout();
@@ -40,6 +44,8 @@ export const Topbar: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <LanguageToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
@@ -71,7 +77,7 @@ export const Topbar: React.FC = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout} className="text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Sair</span>
+                <span>{t('auth.logout')}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

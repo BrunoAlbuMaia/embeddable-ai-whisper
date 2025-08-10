@@ -2,6 +2,7 @@ import React from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/Layout/AppSidebar';
 import { Topbar } from '@/components/Layout/Topbar';
+import { Tutorial } from '@/components/Tutorial';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -9,7 +10,9 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
-    <SidebarProvider>
+    <>
+      <Tutorial />
+      <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
         <div className="flex-1 flex flex-col">
@@ -19,6 +22,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
           </main>
         </div>
       </div>
-    </SidebarProvider>
+      </SidebarProvider>
+    </>
   );
 };
