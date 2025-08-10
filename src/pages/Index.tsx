@@ -39,6 +39,9 @@ const Index = () => {
               <Button variant="outline" asChild>
                 <Link to="/login">Login</Link>
               </Button>
+              <Button variant="secondary" asChild>
+                <Link to="/register">Criar Conta</Link>
+              </Button>
               <Button asChild>
                 <Link to="/dashboard">
                   Dashboard
@@ -203,10 +206,13 @@ useEffect(() => {
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button size="lg" asChild>
-                    <Link to="/dashboard">
-                      Acessar Dashboard
+                    <Link to="/register">
+                      Começar Grátis
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link to="/dashboard">Acessar Dashboard</Link>
                   </Button>
                   <Button variant="outline" size="lg" asChild>
                     <Link to="/login">Fazer Login</Link>

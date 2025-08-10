@@ -10,6 +10,9 @@ import Index from "./pages/Index";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 import ChatPage from "./pages/ChatPage";
+import SelectPlanPage from "./pages/SelectPlanPage";
+import RegisterCompanyPage from "./pages/RegisterCompanyPage";
+import RegisterUserPage from "./pages/RegisterUserPage";
 import ChatsPage from "./pages/dashboard/ChatsPage";
 import DocumentsPage from "./pages/dashboard/DocumentsPage";
 import SegmentsPage from "./pages/dashboard/SegmentsPage";
@@ -30,6 +33,11 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/chat" element={<ChatPage />} />
+              
+              {/* Registration flow */}
+              <Route path="/register" element={<SelectPlanPage />} />
+              <Route path="/register/company" element={<RegisterCompanyPage />} />
+              <Route path="/register/user" element={<RegisterUserPage />} />
 
               {/* Protected dashboard routes */}
               <Route path="/dashboard" element={
