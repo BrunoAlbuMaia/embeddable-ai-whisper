@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, Crown, Zap, Rocket, Gift, ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface PlanFeature {
   text: string;
@@ -107,6 +108,7 @@ const plans: Plan[] = [
 
 const SelectPlanPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSelectPlan = (plan: Plan) => {
     if (plan.free) {
@@ -124,32 +126,32 @@ const SelectPlanPage: React.FC = () => {
       <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" size="sm" asChild>
               <Link to="/" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
-                Voltar ao início
+                <span className="hidden sm:inline">{t('selectPlan.backToHome')}</span>
               </Link>
             </Button>
-            <Button variant="outline" asChild>
-              <Link to="/login">Já tenho conta</Link>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/login">{t('home.alreadyHaveAccount')}</Link>
             </Button>
           </div>
         </div>
       </nav>
 
-      <div className="container mx-auto p-6 space-y-8">
+      <div className="container mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
         {/* Header */}
-        <div className="text-center space-y-4 pt-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Escolha seu Plano
+        <div className="text-center space-y-4 pt-4 md:pt-8">
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+            {t('selectPlan.title')}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comece gratuitamente ou escolha um plano que se adapte às suas necessidades
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+            {t('selectPlan.subtitle')}
           </p>
         </div>
 
         {/* Plans Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid gap-6 max-w-7xl mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan) => {
             const IconComponent = plan.icon;
 
@@ -235,29 +237,29 @@ const SelectPlanPage: React.FC = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="text-center space-y-4 pt-8 border-t max-w-4xl mx-auto">
-          <h3 className="text-lg font-semibold">Por que começar com o Plano FREE?</h3>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
+        <div className="text-center space-y-4 pt-6 md:pt-8 border-t max-w-4xl mx-auto">
+          <h3 className="text-lg font-semibold">{t('selectPlan.whyFree')}</h3>
+          <div className="grid gap-6 text-sm md:grid-cols-3">
             <div className="space-y-2">
               <div className="h-8 w-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
                 <Check className="h-4 w-4" />
               </div>
-              <p className="font-medium">Sem compromisso</p>
-              <p className="text-muted-foreground">Teste nossa plataforma sem cartão de crédito</p>
+              <p className="font-medium">{t('selectPlan.noCommitment')}</p>
+              <p className="text-muted-foreground">{t('selectPlan.noCommitmentDesc')}</p>
             </div>
             <div className="space-y-2">
               <div className="h-8 w-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
                 <Check className="h-4 w-4" />
               </div>
-              <p className="font-medium">Configuração rápida</p>
-              <p className="text-muted-foreground">Comece a usar em menos de 2 minutos</p>
+              <p className="font-medium">{t('selectPlan.quickSetup')}</p>
+              <p className="text-muted-foreground">{t('selectPlan.quickSetupDesc')}</p>
             </div>
             <div className="space-y-2">
               <div className="h-8 w-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
                 <Check className="h-4 w-4" />
               </div>
-              <p className="font-medium">Upgrade fácil</p>
-              <p className="text-muted-foreground">Evolua para planos pagos quando precisar</p>
+              <p className="font-medium">{t('selectPlan.easyUpgrade')}</p>
+              <p className="text-muted-foreground">{t('selectPlan.easyUpgradeDesc')}</p>
             </div>
           </div>
         </div>
