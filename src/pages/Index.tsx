@@ -128,7 +128,7 @@ const Index = () => {
               </span>
             </div>
            <div className="flex gap-1 md:gap-2">
-              <Button variant="outline" size="sm" className="hidden sm:flex" asChild>
+              <Button variant="outline" size="sm" className=" sm:flex" asChild>
                 <Link to="/login">{t('auth.login')}</Link>
               </Button>
               {/* <Button variant="secondary" size="sm" asChild>
