@@ -12,7 +12,7 @@ const ChatPage = () => {
   return (
     <div style={{ height: '100vh' }}>
       {/* Renderiza seu chat com clientId */}
-      <ChatWidget clientId={clientId} />
+      <ChatWidget company_id={clientId} />
     </div>
   );
 };

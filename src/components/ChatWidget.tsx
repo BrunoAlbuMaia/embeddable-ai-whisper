@@ -10,10 +10,10 @@ interface Message {
 }
 
 interface ChatWidgetProps {
-  clientId: string;
+  company_id: string;
 }
 
-const ChatWidget: React.FC<ChatWidgetProps> = ({ clientId }) => {
+const ChatWidget: React.FC<ChatWidgetProps> = ({ company_id }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -50,11 +50,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ clientId }) => {
     setIsLoading(true);
 
     try {
-      const response = await sendMessage(inputValue.trim(), clientId);
+      const response = await sendMessage(inputValue.trim(), company_id);
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: response.resposta,
+        text: response['answer'],
         isUser: false,
         timestamp: new Date()
       };
@@ -113,7 +113,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ clientId }) => {
                   ? 'bg-blue-600 text-white rounded-br-md'
                   : 'bg-gray-100 text-gray-800 rounded-bl-md'
                 }
-              `}>
+              `}
+              style={{ whiteSpace: 'pre-wrap' }} >
                 {message.text}
               </div>
             </div>
@@ -144,7 +145,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ clientId }) => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Digite sua mensagem..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="text-black flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             disabled={isLoading}
           />
           <button

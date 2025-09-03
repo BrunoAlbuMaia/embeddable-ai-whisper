@@ -19,10 +19,13 @@ import ChatsPage from "./pages/dashboard/ChatsPage";
 import DocumentsPage from "./pages/dashboard/DocumentsPage";
 import SegmentsPage from "./pages/dashboard/SegmentsPage";
 import PlansPage from "./pages/dashboard/PlansPage";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

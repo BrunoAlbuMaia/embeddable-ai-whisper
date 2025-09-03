@@ -32,8 +32,10 @@ const Index = () => {
 
   useEffect(() => {
     const script = document.createElement("script");
+    //Url que tem o embed.js
     script.src = "http://localhost:8080/embed.js";
-    script.setAttribute("data-client-id", "DEMO123");
+    //token de acesso ao agent
+    script.setAttribute("data-token-agent", "PdT4wyMgQAw70N9kAZrg4CKuIXKhzdMZxTnGtPRgsGf16KfyXpXjp7hf4sAAIraJ");
     script.setAttribute("data-widget-url", "http://localhost:8080/chat");
     script.async = true;
     document.body.appendChild(script);

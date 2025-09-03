@@ -9,7 +9,7 @@
     return scripts[scripts.length - 1];
   })();
 
-  const clientId = currentScript.getAttribute('data-client-id') || 'default';
+  const token_agent = currentScript.getAttribute('data-token-agent') || 'default';
   const widgetUrl = currentScript.getAttribute('data-widget-url') || window.location.origin + '/chat';
 
   function createChatWidget() {
@@ -31,7 +31,7 @@
 
     const chatIframe = document.createElement('iframe');
     chatIframe.id = 'chat-widget-iframe';
-    chatIframe.src = `${widgetUrl}?client_id=${encodeURIComponent(clientId)}`;
+    chatIframe.src = `${widgetUrl}?client_id=${encodeURIComponent(token_agent)}`;
     chatIframe.style.cssText = `
       border: none;
       width: 100%;

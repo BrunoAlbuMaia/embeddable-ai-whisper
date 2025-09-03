@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 interface ChatAPIResponse {
@@ -6,41 +5,29 @@ interface ChatAPIResponse {
 }
 
 interface ChatAPIRequest {
-  pergunta: string;
+  query: string;      // a tua API usa "query"
   client_id: string;
+  segment_id?: string; // se precisar, você pode passar também
 }
 
 export const useChatAPI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const sendMessage = async (pergunta: string, clientId: string): Promise<ChatAPIResponse> => {
+  const sendMessage = async (query: string, company_id: string): Promise<ChatAPIResponse> => {
     setIsLoading(true);
     setError(null);
 
     try {
-      // Para demonstração, vou simular a API
-      // Na produção, substitua pela URL real: https://minhaapi.com/rag/perguntar
-      const mockResponse = await new Promise<ChatAPIResponse>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            resposta: `Esta é uma resposta simulada para "${pergunta}" do cliente ${clientId}. Em produção, conecte à sua API RAG real.`
-          });
-        }, 1000 + Math.random() * 1000); // Simula delay da API
-      });
-
-      return mockResponse;
-
-      // Código real para produção (descomente quando deployer):
-      /*
-      const response = await fetch('https://minhaapi.com/rag/perguntar', {
+      const response = await fetch('http://localhost:9005/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          pergunta,
-          client_id: clientId
+          query,
+          client_id: "1812f889-670a-426e-a2f6-cc3b7fb19cb0",
+          segment_id: "a1417f8a-92fd-46b0-bb29-343e3e376c01" // se precisar fixo
         } as ChatAPIRequest),
       });
 
@@ -49,8 +36,8 @@ export const useChatAPI = () => {
       }
 
       const data: ChatAPIResponse = await response.json();
-      return data;
-      */
+    
+      return data
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
       setError(errorMessage);
