@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
+import { CreateAgentDialog } from '@/components/CreateAgentDialog';
 import { 
   Plus, 
   MessageSquare, 
@@ -24,6 +26,7 @@ interface ChatHistory {
 }
 
 const ChatsPage = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [aiTrained, setAiTrained] = useState(false);
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
@@ -54,9 +57,9 @@ const ChatsPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleNewChat = () => {
-    // Here you would typically open a new chat interface
-    console.log('Iniciando novo chat...');
+  const handleAgentCreated = () => {
+    // Refresh chat history or any other needed action after agent creation
+    console.log('Agente criado com sucesso!');
   };
 
   const handleViewWidget = () => {
@@ -97,20 +100,22 @@ const ChatsPage = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Chats</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t('chats.title')}</h1>
           <p className="text-muted-foreground">
-            Gerencie conversas e inicie novos chats com a IA
+            {t('chats.subtitle')}
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handleViewWidget}>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button variant="outline" onClick={handleViewWidget} className="w-full sm:w-auto">
             <ExternalLink className="mr-2 h-4 w-4" />
-            Ver Widget
+            {t('chats.viewWidget')}
           </Button>
-          <Button onClick={handleNewChat}>
-            <Plus className="mr-2 h-4 w-4" />
-            Novo Chat
-          </Button>
+          <CreateAgentDialog onSuccess={handleAgentCreated}>
+            <Button className="w-full sm:w-auto">
+              <Plus className="mr-2 h-4 w-4" />
+              {t('chats.newAgent')}
+            </Button>
+          </CreateAgentDialog>
         </div>
       </div>
 
@@ -188,14 +193,16 @@ const ChatsPage = () => {
           {chatHistory.length === 0 ? (
             <div className="text-center py-8">
               <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-medium">Nenhuma conversa ainda</h3>
+              <h3 className="text-lg font-medium">{t('chats.noChats')}</h3>
               <p className="text-muted-foreground mb-4">
-                Inicie sua primeira conversa com a IA
+                {t('chats.startFirstChat')}
               </p>
-              <Button onClick={handleNewChat}>
-                <Plus className="mr-2 h-4 w-4" />
-                Iniciar Chat
-              </Button>
+              <CreateAgentDialog onSuccess={handleAgentCreated}>
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  {t('chats.startChat')}
+                </Button>
+              </CreateAgentDialog>
             </div>
           ) : (
             <div className="space-y-4">
