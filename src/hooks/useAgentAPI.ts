@@ -46,7 +46,8 @@ export const useAgentAPI = () => {
       }
 
       const data = await response.json();
-      return data;
+      return data.content ?? [];
+
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
       setError(errorMessage);

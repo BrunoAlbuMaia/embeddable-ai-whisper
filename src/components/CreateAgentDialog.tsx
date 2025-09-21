@@ -84,7 +84,9 @@ export const CreateAgentDialog: React.FC<CreateAgentDialogProps> = ({
     try {
       setLoadingSegments(true);
       const data = await getSegments();
-      setSegments(data);
+      setSegments(data ?? []);
+
+
     } catch (error) {
       toast({
         title: 'Erro',
